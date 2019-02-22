@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "statePOC"
+  "defaultProject": "statePOC",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
