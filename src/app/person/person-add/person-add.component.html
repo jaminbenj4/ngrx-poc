@@ -1,0 +1,54 @@
+<div class="container">
+  <!-- <div [hidden]="submitted"></div> -->
+  <h1>Add Person</h1>
+  <form (ngSubmit)="onSubmit()" name="myPerson" [formGroup]="myPerson">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input id="firstName" name="firstName" [formControl]="myPerson.controls['firstName']" />
+      <!-- <div [hidden]="firstName.valid || pristine" class="alert alert-danger">
+        First Name is required
+      </div> -->
+      
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" 
+              required
+              [(ngModel)]="person.lastName" name="lastName"
+              #lastName="ngModel"/>
+      
+    </div> -->
+
+    <!-- <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" 
+                required
+                [(ngModel)]="person.email" name="email"
+                #email="ngModel"/>
+        
+      </div>
+       -->
+      <!-- <button type="submit" class="btn btn-success" [disabled]="!personForm.form.valid">Submit</button> -->
+      <button type="button" class="btn btn-default">Cancel</button>
+
+      <div>{{myPerson.controls['firstName'].value}}</div>
+      <div>{{myPerson}}</div>
+  </form>
+</div>
+<!-- <div style="padding: 15px">
+  <div>
+      <label >First Name</label>
+      <input id="firstName" type="text" />
+  </div>
+  <div>
+      <label >Last Name</label>
+      <input id="lastName" type="text" />
+  </div>
+  <div>
+      <label >Email</label>
+      <input id="email" type="email" />
+  </div> -->
+  <!-- <a>Submit</a> -->
+  
+<!-- </div> -->

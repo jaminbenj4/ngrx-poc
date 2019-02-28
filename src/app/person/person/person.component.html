@@ -1,0 +1,7 @@
+<div>
+  testing
+  <!-- add person list and person add... -->
+  <app-person-add [person]="personState" *ngIf="pageState === 'add'" (actionsEmitted)="onFormActions($event)"></app-person-add>
+  <app-person-list *ngIf="pageState === 'list'"></app-person-list>
+  <button (click)="pageState = 'add'" *ngIf="pageState === 'list'">Add Person</button>
+</div>
