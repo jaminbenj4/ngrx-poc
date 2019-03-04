@@ -5,12 +5,13 @@ import { AppComponent } from './app.component';
 import { IsonlineComponent } from './online/isonline/isonline.component';
 
 const appRoutes: Routes = [
-    // {
-    //     path: 'people',
-    //     component: Person
-    // },
     {
         path: '',
+        redirectTo: '/people',
+        pathMatch: 'full'
+    },
+    {
+        path: 'isonline',
         component: IsonlineComponent
     }
 ];

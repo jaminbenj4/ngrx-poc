@@ -8,6 +8,11 @@ import { distinctUntilChanged } from 'rxjs/operators';
 import { personChanged } from 'src/app/store/actions/person.actions';
 // import { IPersonState, IApplicationState } from 'src/app/state/application-state';
 import { Action } from '@ngrx/store';
+import { SetIsServerDown } from 'src/app/store/actions/network';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../store/reducers';
+import {PingServer} from '../../store/actions/network';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-person-add',
@@ -20,7 +25,7 @@ export class PersonAddComponent implements OnInit, OnChanges {
 
   // public personState: IPersonState;
 
-  constructor(private personService: PersonService, private router: Router) {
+  constructor(private personService: PersonService, private router: Router, private store: Store<fromRoot.State>) {
     // this.store.pipe(select(e => e.person)).subscribe(ps => {
     //   this.personState = ps;
     // });
@@ -47,13 +52,25 @@ export class PersonAddComponent implements OnInit, OnChanges {
   //   actions.forEach(this.store.dispatch.bind(this.store));
   // }
 
-  // onSubmit() {
-  //   const newPerson: Person = this.person1 as Person;
-  //   this.personService.addPerson(newPerson).subscribe();
-  //   this.submitted = true;
-  //   console.log(this.person1);
-  //   this.router.navigate(['/people']);
-  // }
+  onSubmit() {
+    const newPerson: Person = this.myPerson.value as Person;
+    this.actionsEmitted.emit([personChanged(this.myPerson.value)]);
+    let x = this.store.select(fromRoot.getPersonState).subscribe(val => console.log(val));
+    console.log(newPerson);
+    this.personService.addPerson(newPerson).subscribe(
+      res => {
+        console.log(res);
+        this.router.navigate(['/people']);
+        },
+      (error: Response | any) => {if (error.status === 0) {
+        const s = new SetIsServerDown(true);
+        this.router.navigate(['/isonline', {serverDown: true}]);
+      }},
+      () => console.log('Completed')
+    );
+    // this.store.dispatch(new PingServer(newPerson));
+    this.submitted = true;
+  }
 
   ngOnInit() {
     this.myPerson.controls.firstName.valueChanges.pipe(distinctUntilChanged()).subscribe((value) => {
@@ -71,9 +88,10 @@ export class PersonAddComponent implements OnInit, OnChanges {
     if (!changes.form || changes.form.isFirstChange()) {
       return;
     }
-
     // whenever input changes (and input is the form's state in the store), we update the value of the control
     this.myPerson.controls.firstName.setValue(changes.form.currentValue.firstName);
+    this.myPerson.controls.lastName.setValue(changes.form.currentValue.lastName);
+    this.myPerson.controls.email.setValue(changes.form.currentValue.email);
   }
 
 }

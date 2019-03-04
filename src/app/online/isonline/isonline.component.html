@@ -8,5 +8,15 @@
   <div style="text-align:center">
       <h1>Detect Online/Offline</h1>
       <h2>Online: {{isOnline$ | async}}</h2>
+      <h2>Server Down: {{isServerDown$ | async}}</h2>
+  </div>
+
+  <div>
+    <h2>New Server Down: {{pageState}}</h2>
+    <h2>Person: {{person$ | async}}</h2>
+  </div>
+
+  <div>
+    <button class="btn btn-primary" *ngIf="isOnline$ | async">Submit Again</button>
   </div>
   

@@ -1,15 +1,24 @@
 <div class="container">
   <!-- <div [hidden]="submitted"></div> -->
-  <h1>Add Person</h1>
+  <h3>Add Person</h3>
   <form (ngSubmit)="onSubmit()" name="myPerson" [formGroup]="myPerson">
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input id="firstName" name="firstName" [formControl]="myPerson.controls['firstName']" />
-      <!-- <div [hidden]="firstName.valid || pristine" class="alert alert-danger">
-        First Name is required
-      </div> -->
+      <input class="form-control" id="firstName" name="firstName" [formControl]="myPerson.controls['firstName']" />
       
     </div>
+
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input class="form-control" id="lastName" name="lastName" [formControl]="myPerson.controls['lastName']" />
+        
+      </div>
+
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control" id="email" name="email" [formControl]="myPerson.controls['email']" />
+          
+        </div>
 
     <!-- <div class="form-group">
       <label for="lastName">Last Name</label>
@@ -29,11 +38,12 @@
         
       </div>
        -->
-      <!-- <button type="submit" class="btn btn-success" [disabled]="!personForm.form.valid">Submit</button> -->
+      <button type="submit" class="btn btn-success" >Submit</button>  <!-- [disabled]="!personForm.form.valid" -->
       <button type="button" class="btn btn-default">Cancel</button>
 
-      <div>{{myPerson.controls['firstName'].value}}</div>
-      <div>{{myPerson}}</div>
+      <div>first name: {{myPerson.controls['firstName'].value}}</div>
+      <div>last name: {{myPerson.controls['lastName'].value}}</div>
+      <div>email: {{myPerson.controls['email'].value}}</div>
   </form>
 </div>
 <!-- <div style="padding: 15px">

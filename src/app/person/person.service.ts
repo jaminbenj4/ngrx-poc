@@ -30,12 +30,13 @@ export class PersonService {
     return this.http.get<Person[]>(this.baseUrl + this.peopleUrl);
   }
   addPerson(person: Person): Observable<Person> {
-    const response = this.http.post<Person>(this.baseUrl + this.peopleUrl, person, httpOptions);
-    console.log(response);
-    if (response == null) {
-      this.router.navigate(['/people']);
-    }
-
-    return response;
+    // const response =
+    return this.http.post<Person>(this.baseUrl + this.peopleUrl, person, httpOptions);
+    // console.log(response);
+    // return response.catch((e: any) => Observable.throwError(this.errorHandler(e)));
   }
+
+  // errorHandler(error: any): void {
+  //   this.router.navigate(['']);
+  // }
 }
